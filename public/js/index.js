@@ -35,19 +35,31 @@ var refreshTasks = function() {
   API.getTasks().then(function(data) {
     var $tasks = data.map(function(task) {
       var $p = $("<p>").text(task.text);
+      var $span = $("<span>").text(task.description);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
           "data-id": task.id
         })
-        .append($p);
+        .append($p)
+        .append($span);
 
-      var $button = $("<button>")
+      var $delbutton = $("<button>")
         .addClass("btn btn-danger float-right delete")
         .text("ｘ");
 
-      $li.append($button);
+      var $compbutton = $("<button>")
+        .addClass("btn btn-success float-right completed")
+        .html("&#10003;");
+
+      var $edbutton = $("<button>")
+        .addClass("btn btn-info float-right edit")
+        .html("&#9998;");
+
+      $li.append($delbutton);
+      $li.append($compbutton);
+      $li.append($edbutton);
 
       return $li;
     });
