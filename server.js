@@ -21,6 +21,8 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+HandlebarsIntl.registerWith(Handlebars);
+
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
