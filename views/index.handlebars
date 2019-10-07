@@ -55,7 +55,7 @@
             {{#each tasks}}
             <li data-id="{{this.id}}" class="list-group-item">
               <span>{{this.text}}</span>
-              <span class="float-right">Complete by: {{this.completeBy}}</span>
+              <span class="float-right">Complete by: {{formatDate this.completeBy}}</span>
               <br>
               <span>{{this.description}}</span>
               <button class="btn btn-danger float-right delete">ｘ</button>
