@@ -16,6 +16,13 @@ var API = {
       data: JSON.stringify(task)
     });
   },
+  updateTask: function(task) {
+    return $.ajax({
+      url: "/api/tasks/" + task.id,
+      method: "PUT",
+      data: task
+    });
+  },
   getTasks: function() {
     return $.ajax({
       url: "api/tasks",
@@ -104,6 +111,22 @@ var handleDeleteBtnClick = function() {
   });
 };
 
+var handleCompleteBtnClick = function() {
+  console.log('CLICKED COMPLETE');
+  var id = $(this)
+    .parent()
+    .attr("data-id");
+
+  API.updateTask({
+    id,
+    complete: true
+  }).then(function(res) {
+    console.log('COMPLETED TASK UPDATE', res)
+    refreshTasks();
+  });
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $taskList.on("click", ".delete", handleDeleteBtnClick);
+$taskList.on("click", ".completed", handleCompleteBtnClick);
