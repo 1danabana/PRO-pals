@@ -12,6 +12,7 @@ module.exports = function(app) {
   app.post("/api/tasks", function(req, res) {
     db.Todos.create({
       text: req.body.text,
+      description: req.body.text,
       complete: req.body.complete
     }).then(function(dbTasks) {
       res.json(dbTasks);
@@ -20,33 +21,42 @@ module.exports = function(app) {
 
   // Delete an example by id
   app.delete("/api/tasks/:id", function(req, res) {
-    db.Todos.destroy({ 
-      where: { 
-        id: req.params.id 
-      } 
-    }).then(function(result) {
-      res.status(200).end();
+    db.Todos.destroy({
+      where: {
+        id: req.params.id
+      }
     })
-    .catch(function(err){
-      res.status(500).end();
-    })
+      .then(function() {
+        res.status(200).end();
+      })
+      .catch(function(err) {
+        err.status(500).end();
+      });
   });
- // PUT route for updating todos. We can get the updated todo data from req.body
- app.put("/api/tasks", function(req, res) {
-  // Use the sequelize update method to update a todo to be equal to the value of req.body
-  // req.body will contain the id of the todo we need to update
-  db.Todo.update({
-    text: req.body.text,
-    complete: req.body.complete,
-  },{
-    where: {
-      id: req.body.id,
+  // PUT route for updating todos. We can get the updated todo data from req.body
+  app.put("/api/tasks/:id", function(req, res) {
+    // Use the sequelize update method to update a todo to be equal to the value of req.body
+    // req.body will contain the id of the todo we need to update
+    var updated = {};
+    if (req.body.text) {
+      updated.text = req.body.text;
     }
-  }).then(function(Tasks){
-    res.json(Tasks);
-  }).catch(function(err){
-    res.status(500).end();
-  })
-});
+    if (req.body.complete) {
+      updated.complete = req.body.complete;
+    }
+    console.log('updated', updated);
+    console.log('req.params.id', req.params.id);
+    db.Todos.update(updated, {
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(function(Tasks) {
+        console.log('updated response', Tasks);
+        res.json(Tasks);
+      })
+      .catch(function() {
+        res.status(500).end();
+      });
+  });
 };
-  
