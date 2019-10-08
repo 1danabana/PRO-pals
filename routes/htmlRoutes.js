@@ -1,11 +1,18 @@
 var db = require("../models");
+var moment = require("moment");
 
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.Todos.findAll({}).then(function(dbTasks) {
       res.render("index", {
-        tasks: dbTasks
+        tasks: dbTasks,
+
+        helpers: {
+          formatDate: function(date) {
+            return moment(date).format("MMMM D, YYYY");
+          }
+        }
       });
     });
   });

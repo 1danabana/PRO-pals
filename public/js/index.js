@@ -1,6 +1,7 @@
 // Get references to page elements
 var $taskTitle = $("#task-title");
 var $taskDescription = $("#task-description");
+var $taskCompleteBy = $("#datetimepicker");
 var $submitBtn = $("#submit");
 var $taskList = $("#task-list");
 
@@ -34,16 +35,22 @@ var API = {
 var refreshTasks = function() {
   API.getTasks().then(function(data) {
     var $tasks = data.map(function(task) {
-      var $p = $("<p>").text(task.text);
-      var $span = $("<span>").text(task.description);
+      var $spanTitle = $("<span>").text(task.text);
+      var $spanDate = $("<span>")
+        .text("Complete by: " + moment(task.completeBy).format("MMMM D, YYYY"))
+        .attr({ class: "float-right" });
+      var $spanDescription = $("<span>").text(task.description);
+      var $br = $("<br>");
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
           "data-id": task.id
         })
-        .append($p)
-        .append($span);
+        .append($spanTitle)
+        .append($spanDate)
+        .append($br)
+        .append($spanDescription);
 
       var $delbutton = $("<button>")
         .addClass("btn btn-danger float-right delete")
@@ -76,12 +83,15 @@ var handleFormSubmit = function(event) {
 
   var task = {
     text: $taskTitle.val().trim(),
-    description: $taskDescription.val().trim()
+    description: $taskDescription.val().trim(),
+    completeBy: $taskCompleteBy.val().trim()
   };
 
   if (!task.text) {
     alert("You must enter a task!");
     return;
+  } else if (!task.completeBy) {
+    alert("You must enter a completion date!");
   }
 
   API.saveTask(task).then(function() {
@@ -90,6 +100,7 @@ var handleFormSubmit = function(event) {
 
   $taskTitle.val("");
   $taskDescription.val("");
+  $taskCompleteBy.val("");
 };
 
 // handleDeleteBtnClick is called when an Task's delete button is clicked

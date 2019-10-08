@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
     completed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
-    }
+    },
+    completeBy: DataTypes.DATEONLY
   });
   return Todos;
 };
