@@ -5,3 +5,18 @@
 .btn {
   margin-right: 2px;
 }
+.jumbotron{
+  background-image: url("../img/background.png"); 
+  -webkit-background-size: 100% 100%;
+height: 500px;
+}
+
+.card {
+  background: #e4f1a6;
+}
+.card-header{
+  background: #ff8364;
+}
+.display-4 {
+  color: aliceblue; 
+}

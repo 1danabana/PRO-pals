@@ -44,15 +44,15 @@ module.exports = function(app) {
     if (req.body.complete) {
       updated.complete = req.body.complete;
     }
-    console.log('updated', updated);
-    console.log('req.params.id', req.params.id);
+    console.log("updated", updated);
+    console.log("req.params.id", req.params.id);
     db.Todos.update(updated, {
       where: {
         id: req.params.id
       }
     })
       .then(function(Tasks) {
-        console.log('updated response', Tasks);
+        console.log("updated response", Tasks);
         res.json(Tasks);
       })
       .catch(function() {

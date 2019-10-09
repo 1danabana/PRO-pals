@@ -19,8 +19,9 @@ var API = {
   updateTask: function(task) {
     return $.ajax({
       url: "/api/tasks/" + task.id,
-      method: "PUT",
-      data: task
+      method: "UPDATE",
+      // data: task
+      data: JSON.stringify(task)
     });
   },
   getTasks: function() {
@@ -111,22 +112,27 @@ var handleDeleteBtnClick = function() {
   });
 };
 
-var handleCompleteBtnClick = function() {
-  console.log('CLICKED COMPLETE');
-  var id = $(this)
+// eslint-disable-next-line no-unused-vars
+var handleCompletedBtnClick = function() {
+  console.log("CLICKED COMPLETE");
+  // eslint-disable-next-line no-unused-vars
+  var idToCompleted = $(this)
     .parent()
     .attr("data-id");
 
-  API.updateTask({
-    id,
-    complete: true
-  }).then(function(res) {
-    console.log('COMPLETED TASK UPDATE', res)
+  // API.updateTask({
+  //   id,
+  //   complete: true
+  // }).then(function(res) {
+  //   console.log('COMPLETED TASK UPDATE');
+  //   refreshTasks();
+  API.completedTask(idToCompleted).then(function() {
     refreshTasks();
   });
+  // });
 };
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $taskList.on("click", ".delete", handleDeleteBtnClick);
-$taskList.on("click", ".completed", handleCompleteBtnClick);
+$taskList.on("click", ".completed", handleCompletedBtnClick);
