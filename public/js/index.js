@@ -28,6 +28,12 @@ var API = {
       url: "api/tasks/" + id,
       type: "DELETE"
     });
+  },
+  completeTask: function(id) {
+    return $.ajax({
+      url: "api/tasks/" + id,
+      type: "PUT"
+    });
   }
 };
 
@@ -35,40 +41,76 @@ var API = {
 var refreshTasks = function() {
   API.getTasks().then(function(data) {
     var $tasks = data.map(function(task) {
-      var $spanTitle = $("<span>").text(task.text);
-      var $spanDate = $("<span>")
-        .text("Complete by: " + moment(task.completeBy).format("MMMM D, YYYY"))
-        .attr({ class: "float-right" });
-      var $spanDescription = $("<span>").text(task.description);
-      var $br = $("<br>");
+      if (!task.completed) {
+        var $spanTitle = $("<span>").text(task.text);
+        var $spanDate = $("<span>")
+          .text(
+            "Complete by: " + moment(task.completeBy).format("MMMM D, YYYY")
+          )
+          .attr({ class: "float-right" });
+        var $spanDescription = $("<span>").text(task.description);
+        var $br = $("<br>");
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": task.id
-        })
-        .append($spanTitle)
-        .append($spanDate)
-        .append($br)
-        .append($spanDescription);
+        var $li = $("<li>")
+          .attr({
+            class: "list-group-item",
+            "data-id": task.id
+          })
+          .append($spanTitle)
+          .append($spanDate)
+          .append($br)
+          .append($spanDescription);
 
-      var $delbutton = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+        var $delbutton = $("<button>")
+          .addClass("btn btn-danger float-right delete")
+          .text("ｘ");
 
-      var $compbutton = $("<button>")
-        .addClass("btn btn-success float-right completed")
-        .html("&#10003;");
+        var $compbutton = $("<button>")
+          .addClass("btn btn-success float-right completed")
+          .html("&#10003;");
 
-      var $edbutton = $("<button>")
-        .addClass("btn btn-info float-right edit")
-        .html("&#9998;");
+        var $edbutton = $("<button>")
+          .addClass("btn btn-info float-right edit")
+          .html("&#9998;");
 
-      $li.append($delbutton);
-      $li.append($compbutton);
-      $li.append($edbutton);
+        $li.append($delbutton);
+        $li.append($compbutton);
+        $li.append($edbutton);
 
-      return $li;
+        return $li;
+      } else {
+        var $spanTitle = $("<span>")
+          .text(task.text)
+          .css("text-decoration", "line-through");
+        var $spanDate = $("<span>")
+          .text(
+            "Complete by: " + moment(task.completeBy).format("MMMM D, YYYY")
+          )
+          .attr({ class: "float-right" })
+          .css("text-decoration", "line-through");
+        var $spanDescription = $("<span>")
+          .text(task.description)
+          .css("text-decoration", "line-through");
+        var $br = $("<br>");
+
+        var $li = $("<li>")
+          .attr({
+            class: "list-group-item",
+            "data-id": task.id
+          })
+          .append($spanTitle)
+          .append($spanDate)
+          .append($br)
+          .append($spanDescription);
+
+        var $compDate = $("<span>")
+          .addClass("float-right")
+          .text("Completed on: " + moment().format("MMMM D, YYYY"));
+
+        $li.append($compDate);
+
+        return $li;
+      }
     });
 
     $taskList.empty();
@@ -115,6 +157,17 @@ var handleDeleteBtnClick = function() {
   });
 };
 
+var handleCompBtnClick = function() {
+  var taskID = $(this)
+    .parent()
+    .attr("data-id");
+
+  API.completeTask(taskID).then(function() {
+    refreshTasks();
+  });
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $taskList.on("click", ".delete", handleDeleteBtnClick);
+$taskList.on("click", ".completed", handleCompBtnClick);
