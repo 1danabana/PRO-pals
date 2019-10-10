@@ -24,6 +24,9 @@ var API = {
       data: JSON.stringify(task)
     });
   },
+  completedTask: function() {
+    console.log("here");
+  },
   getTasks: function() {
     return $.ajax({
       url: "api/tasks",
@@ -114,7 +117,7 @@ var handleDeleteBtnClick = function() {
 
 // eslint-disable-next-line no-unused-vars
 var handleCompletedBtnClick = function() {
-  console.log("CLICKED COMPLETE");
+  console.log(this);
   // eslint-disable-next-line no-unused-vars
   var idToCompleted = $(this)
     .parent()
