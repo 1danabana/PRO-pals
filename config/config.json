@@ -1,14 +1,22 @@
 {
   "development": {
     "username": "root",
+<<<<<<< HEAD
     "password": "123456",
+=======
+    "password": null,
+>>>>>>> 811a3a51ca48ebb59bf6cab15ad401d310aa2f23
     "database": "list_db",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
+<<<<<<< HEAD
     "password": "123456",
+=======
+    "password": null,
+>>>>>>> 811a3a51ca48ebb59bf6cab15ad401d310aa2f23
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",
@@ -18,4 +26,8 @@
     "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 811a3a51ca48ebb59bf6cab15ad401d310aa2f23

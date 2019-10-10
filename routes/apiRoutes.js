@@ -1,14 +1,16 @@
+/* eslint-disable prettier/prettier */
 var db = require("../models");
+var moment = require("../node_modules/moment");
 
 module.exports = function(app) {
-  // Get all examples
+  // Get all tasks
   app.get("/api/tasks", function(req, res) {
     db.Todos.findAll({}).then(function(dbTasks) {
       res.json(dbTasks);
     });
   });
 
-  // Create a new example
+  // Create a new task
   app.post("/api/tasks", function(req, res) {
     db.Todos.create({
       text: req.body.text,
@@ -19,7 +21,7 @@ module.exports = function(app) {
     });
   });
 
-  // Delete an example by id
+  // Delete a task by id
   app.delete("/api/tasks/:id", function(req, res) {
     db.Todos.destroy({
       where: {
@@ -58,5 +60,21 @@ module.exports = function(app) {
       .catch(function() {
         res.status(500).end();
       });
+  });
+
+  app.put("/api/tasks/:id", function(req, res) {
+    db.Todos.update(
+      {
+        completed: true,
+        completedOn: moment().format("MMMM D, YYYY")
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    ).then(function(dbTasks) {
+      res.json(dbTasks);
+    });
   });
 };
