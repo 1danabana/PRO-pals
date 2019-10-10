@@ -1,4 +1,6 @@
+/* eslint-disable prettier/prettier */
 var db = require("../models");
+var moment = require("../node_modules/moment");
 
 module.exports = function(app) {
   // Get all tasks
@@ -18,6 +20,22 @@ module.exports = function(app) {
   // Delete a task by id
   app.delete("/api/tasks/:id", function(req, res) {
     db.Todos.destroy({ where: { id: req.params.id } }).then(function(dbTasks) {
+      res.json(dbTasks);
+    });
+  });
+
+  app.put("/api/tasks/:id", function(req, res) {
+    db.Todos.update(
+      {
+        completed: true,
+        completedOn: moment().format("MMMM D, YYYY")
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
+    ).then(function(dbTasks) {
       res.json(dbTasks);
     });
   });
