@@ -4,6 +4,7 @@ var $taskDescription = $("#task-description");
 var $taskCompleteBy = $("#datetimepicker");
 var $submitBtn = $("#submit");
 var $taskList = $("#task-list");
+var $taskCount = $("#task-count");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -115,6 +116,7 @@ var refreshTasks = function() {
 
     $taskList.empty();
     $taskList.append($tasks);
+    displayTaskCount();
   });
 };
 
@@ -167,7 +169,21 @@ var handleCompBtnClick = function() {
   });
 };
 
+var displayTaskCount = function() {
+  var taskCount = 0;
+  API.getTasks().then(function(data) {
+    for (var i = 0; i < data.length; i++) {
+      if (!data[i].completed) {
+        taskCount++;
+      }
+    }
+    $taskCount.text("Tasks Remaining: " + taskCount);
+  });
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $taskList.on("click", ".delete", handleDeleteBtnClick);
 $taskList.on("click", ".completed", handleCompBtnClick);
+
+displayTaskCount();

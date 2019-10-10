@@ -5,3 +5,11 @@
 .btn {
   margin-right: 2px;
 }
+
+.card {
+  background: #e4f1a6;
+}
+
+.card-header {
+  background: #ff8364;
+}
