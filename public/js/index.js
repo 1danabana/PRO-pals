@@ -3,6 +3,9 @@ var $taskTitle = $("#task-title");
 var $taskDescription = $("#task-description");
 var $taskCompleteBy = $("#datetimepicker");
 var $submitBtn = $("#submit");
+var $deleteBtn = $("#delete");
+var $completeBtn = $("#completed");
+var $editBtn = $("#edit");
 var $taskList = $("#task-list");
 var $taskCount = $("#task-count");
 
@@ -183,7 +186,8 @@ var displayTaskCount = function() {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$taskList.on("click", ".delete", handleDeleteBtnClick);
-$taskList.on("click", ".completed", handleCompBtnClick);
+$deleteBtn.on("click", handleDeleteBtnClick);
+$completeBtn.on("click", handleCompBtnClick);
+$editBtn.on("click", handleEditBtnClick);
 
 displayTaskCount();
