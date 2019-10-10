@@ -168,26 +168,6 @@ var handleDeleteBtnClick = function() {
   });
 };
 
-<<<<<<< HEAD
-// eslint-disable-next-line no-unused-vars
-var handleCompletedBtnClick = function() {
-  console.log(this);
-  // eslint-disable-next-line no-unused-vars
-  var idToCompleted = $(this)
-    .parent()
-    .attr("data-id");
-
-  // API.updateTask({
-  //   id,
-  //   complete: true
-  // }).then(function(res) {
-  //   console.log('COMPLETED TASK UPDATE');
-  //   refreshTasks();
-  API.completedTask(idToCompleted).then(function() {
-    refreshTasks();
-  });
-  // });
-=======
 var handleCompBtnClick = function() {
   var taskID = $(this)
     .parent()
@@ -196,14 +176,9 @@ var handleCompBtnClick = function() {
   API.completeTask(taskID).then(function() {
     refreshTasks();
   });
->>>>>>> 811a3a51ca48ebb59bf6cab15ad401d310aa2f23
 };
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $taskList.on("click", ".delete", handleDeleteBtnClick);
-<<<<<<< HEAD
-$taskList.on("click", ".completed", handleCompletedBtnClick);
-=======
 $taskList.on("click", ".completed", handleCompBtnClick);
->>>>>>> 811a3a51ca48ebb59bf6cab15ad401d310aa2f23
