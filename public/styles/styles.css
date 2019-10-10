@@ -5,11 +5,39 @@
 .btn {
   margin-right: 2px;
 }
-
+.jumbotron {
+  background: #c1c7a5;
+}
 .card {
   background: #e4f1a6;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 .card-header {
   background: #ff8364;
+  
+
+  font-family: 'Shojumaru', cursive;
+
+  font-family: 'Cutive', serif;
+
+  font-family: 'Fontdiner Swanky', cursive;
+
+  font-family: 'Lobster', cursive;
+
+  font-family: 'Russo One', sans-serif;
+
+  font-family: 'Yantramanav', sans-serif;
+
+  font-family: 'Abril Fatface', cursive;
+
+
+}
+.display-4 {
+  font-family: 'Shojumaru', cursive;
+}
+.display-5 {
+  font-family: 'Shojumaru', cursive;
+  font-family: 'Cutive', serif;
+  font-family: 'Fontdiner Swanky', cursive;
 }
