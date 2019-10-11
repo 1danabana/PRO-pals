@@ -24,6 +24,12 @@ var API = {
       type: "GET"
     });
   },
+  getTask: function(id) {
+    return $.ajax({
+      url: "api/getTask/" + id,
+      type: "GET"
+    });
+  },
   deleteTask: function(id) {
     return $.ajax({
       url: "api/tasks/" + id,
@@ -166,6 +172,21 @@ var handleCompBtnClick = function() {
 
   API.completeTask(taskID).then(function() {
     refreshTasks();
+    API.getTask(taskID).then(function(data) {
+      var taskArray = data.map(function(elem) { return elem });
+      if(taskArray) {
+        var task = taskArray[0];
+        //alert(task.completedOn);
+        var date = moment(task.completedBy)
+        var now = moment();
+
+        if (now > date) {
+           // date is past
+        } else {
+           // date is future
+        }       
+      }
+    });
   });
 };
 
