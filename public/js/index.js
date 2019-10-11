@@ -5,6 +5,10 @@ var $taskCompleteBy = $("#datetimepicker");
 var $submitBtn = $("#submit");
 var $taskList = $("#task-list");
 var $taskCount = $("#task-count");
+var $livesCount = $("#lives-count");
+
+//Globally scoped lives variable
+var lives = 9;
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -21,6 +25,12 @@ var API = {
   getTasks: function() {
     return $.ajax({
       url: "api/tasks",
+      type: "GET"
+    });
+  },
+  getTask: function(id) {
+    return $.ajax({
+      url: "api/tasks/" + id,
       type: "GET"
     });
   },
@@ -117,6 +127,7 @@ var refreshTasks = function() {
     $taskList.empty();
     $taskList.append($tasks);
     displayTaskCount();
+    displayLives();
   });
 };
 
@@ -165,6 +176,11 @@ var handleCompBtnClick = function() {
     .attr("data-id");
 
   API.completeTask(taskID).then(function() {
+    API.getTask(taskID).then(function(task) {
+      if (moment(task.completeBy).isBefore(task.completedOn)) {
+        lives--;
+      }
+    });
     refreshTasks();
   });
 };
@@ -185,6 +201,10 @@ var displayTaskCount = function() {
   });
 };
 
+var displayLives = function() {
+  $livesCount.text("Lives Remaining: " + lives + "/9");
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $taskList.on("click", ".delete", handleDeleteBtnClick);
@@ -192,3 +212,4 @@ $taskList.on("click", ".completed", handleCompBtnClick);
 $taskList.on("click", ".edit", handleEditBtnClick);
 
 displayTaskCount();
+displayLives();
