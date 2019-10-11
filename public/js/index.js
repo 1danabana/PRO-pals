@@ -169,10 +169,6 @@ var handleCompBtnClick = function() {
   });
 };
 
-var handleEditBtnClick = function() {
-  console.log("BUTTON CLICKED!");
-};
-
 var displayTaskCount = function() {
   var taskCount = 0;
   API.getTasks().then(function(data) {
@@ -189,6 +185,5 @@ var displayTaskCount = function() {
 $submitBtn.on("click", handleFormSubmit);
 $taskList.on("click", ".delete", handleDeleteBtnClick);
 $taskList.on("click", ".completed", handleCompBtnClick);
-$taskList.on("click", ".edit", handleEditBtnClick);
 
 displayTaskCount();
