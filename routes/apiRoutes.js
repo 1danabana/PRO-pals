@@ -10,6 +10,13 @@ module.exports = function(app) {
     });
   });
 
+  //Get one task
+  app.get("/api/tasks/:id", function(req, res) {
+    db.Todos.findOne({ where: {id: req.params.id } }).then(function(dbTasks) {
+      res.json(dbTasks);
+    });
+  });
+
   // Create a new task
   app.post("/api/tasks", function(req, res) {
     db.Todos.create(req.body).then(function(dbTasks) {
