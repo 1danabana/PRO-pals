@@ -14,6 +14,8 @@ This incentivizes you to break tasks up into smaller, easier-to-accomplish subta
 
 Here are some things that we would be interested in implementing later on down the road:
 
+-Allow users to edit tasks (but not edit date to prevent cheating)
+<br>
 -Track high scores for how long you can go before procrastinating
 <br>
 -Set more dynamic rewards/consequences for procrastination (doing tasks earlier regenerates lives, being late by more than a few days loses more than one life, etc)
