@@ -216,7 +216,6 @@ var displayLives = function() {
 $submitBtn.on("click", handleFormSubmit);
 $taskList.on("click", ".delete", handleDeleteBtnClick);
 $taskList.on("click", ".completed", handleCompBtnClick);
-$taskList.on("click", ".edit", handleEditBtnClick);
 
 displayTaskCount();
 displayLives();
