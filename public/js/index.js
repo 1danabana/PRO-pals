@@ -90,13 +90,8 @@ var refreshTasks = function() {
           .addClass("btn btn-success float-right completed")
           .html("&#10003;");
 
-        var $edbutton = $("<button>")
-          .addClass("btn btn-info float-right edit")
-          .html("&#9998;");
-
         $li.append($delbutton);
         $li.append($compbutton);
-        $li.append($edbutton);
 
         return $li;
       } else {
@@ -196,10 +191,6 @@ var handleCompBtnClick = function() {
     });
     refreshTasks();
   });
-};
-
-var handleEditBtnClick = function() {
-  console.log("BUTTON CLICKED!");
 };
 
 var displayTaskCount = function() {
