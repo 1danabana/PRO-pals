@@ -31,6 +31,7 @@ module.exports = function(app) {
     });
   });
 
+  // Mark task complete by id
   app.put("/api/tasks/:id", function(req, res) {
     db.Todos.update(
       {
@@ -46,4 +47,21 @@ module.exports = function(app) {
       res.json(dbTasks);
     });
   });
+
+  // Get current lives count
+  app.get("/api/lives", function(req, res) {
+    db.Lives.findAll({}).then(function(dbLives) {
+      res.json(dbLives);
+    });
+  });
+
+  // Update lives count
+  app.put("/api/lives/:id", function(req, res) {
+    db.Lives.update(
+      {lives: req.body.lives}, {where: {id: req.params.id}}
+    ).then(function(dbLives) {
+      res.json(dbLives);
+    });
+  });
+
 };
