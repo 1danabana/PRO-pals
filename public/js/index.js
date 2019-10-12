@@ -1,6 +1,6 @@
 // Get references to page elements
 var $taskTitle = $("#task-title");
-var $taskDescription = $("#task-description");
+
 var $taskCompleteBy = $("#datetimepicker");
 var $submitBtn = $("#submit");
 var $taskList = $("#task-list");
@@ -49,7 +49,7 @@ var refreshTasks = function() {
             "Complete by: " + moment(task.completeBy).format("MMMM D, YYYY")
           )
           .attr({ class: "float-right" });
-        var $spanDescription = $("<span>").text(task.description);
+        
         var $br = $("<br>");
 
         var $li = $("<li>")
@@ -60,7 +60,7 @@ var refreshTasks = function() {
           .append($spanTitle)
           .append($spanDate)
           .append($br)
-          .append($spanDescription);
+         
 
         var $delbutton = $("<button>")
           .addClass("btn btn-danger float-right delete")
@@ -89,9 +89,7 @@ var refreshTasks = function() {
           )
           .attr({ class: "float-right" })
           .css("text-decoration", "line-through");
-        var $spanDescription = $("<span>")
-          .text(task.description)
-          .css("text-decoration", "line-through");
+        
         var $br = $("<br>");
 
         var $li = $("<li>")
@@ -102,7 +100,7 @@ var refreshTasks = function() {
           .append($spanTitle)
           .append($spanDate)
           .append($br)
-          .append($spanDescription);
+          
 
         var $compDate = $("<span>")
           .addClass("float-right")
@@ -127,7 +125,7 @@ var handleFormSubmit = function(event) {
 
   var task = {
     text: $taskTitle.val().trim(),
-    description: $taskDescription.val().trim(),
+    
     completeBy: $taskCompleteBy.val().trim()
   };
 
@@ -143,7 +141,7 @@ var handleFormSubmit = function(event) {
   });
 
   $taskTitle.val("");
-  $taskDescription.val("");
+  
   $taskCompleteBy.val("");
 };
 
