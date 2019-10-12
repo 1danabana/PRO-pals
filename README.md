@@ -14,10 +14,13 @@ This incentivizes you to break tasks up into smaller, easier-to-accomplish subta
 
 Here are some things that we would be interested in implementing later on down the road:
 
-+Track high scores for how long you can go before procrastinating
-+Set more dynamic rewards/consequences for procrastination (doing tasks earlier regenerates lives, being late by more than a few days loses more than one life, etc)
-+Make the PRO-PAL more Tamagotchi-like (feeding, playing, petting, etc)
-+Social aspect to app (compare streaks with friends, have PRO-PALs playing with each other)
+-Track high scores for how long you can go before procrastinating
+<br>
+-Set more dynamic rewards/consequences for procrastination (doing tasks earlier regenerates lives, being late by more than a few days loses more than one life, etc)
+<br>
+-Make the PRO-PAL more Tamagotchi-like (feeding, playing, petting, etc)
+<br>
+-Social aspect to app (compare streaks with friends, have PRO-PALs playing with each other)
 
 
 This app was built by Peter, Dan, Shane, and Divya. It is our second group project for the UCSD Full Stack Development Bootcamp. It is a full stack app which follows the Model View Controller Framework and uses MySQL/Sequelize, Express.js, Express-Handlebars, and Node.js. It also uses an external library called Tempus Dominus which is a Bootstrap stylized datepicker. This app showcases our combined knowledge of integrating front and back end technologies, concepts, and frameworks.
