@@ -5,8 +5,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
 
-    description: DataTypes.TEXT,
-
     completed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
