@@ -7,9 +7,6 @@ var $taskList = $("#task-list");
 var $taskCount = $("#task-count");
 var $livesCount = $("#lives-count");
 
-//Globally scoped lives variable
-var lives = 9;
-
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveTask: function(task) {
@@ -44,6 +41,22 @@ var API = {
     return $.ajax({
       url: "api/tasks/" + id,
       type: "PUT"
+    });
+  },
+  getLives: function() {
+    return $.ajax({
+      url: "api/lives",
+      type: "GET"
+    });
+  },
+  updateLives: function() {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      url: "api/lives/1",
+      type: "PUT",
+      data: JSON.stringify(updatedLives)
     });
   }
 };
@@ -178,7 +191,16 @@ var handleCompBtnClick = function() {
   API.completeTask(taskID).then(function() {
     API.getTask(taskID).then(function(task) {
       if (moment(task.completeBy).isBefore(task.completedOn)) {
-        lives--;
+        API.getLives().then(function(data) {
+          var lives = data[0].lives;
+          lives--;
+          updatedLives = {
+            lives: lives
+          };
+          API.updateLives(updatedLives).then(function() {
+            displayLives();
+          });
+        });
       }
     });
     refreshTasks();
@@ -202,7 +224,10 @@ var displayTaskCount = function() {
 };
 
 var displayLives = function() {
-  $livesCount.text("Lives Remaining: " + lives + "/9");
+  API.getLives().then(function(data) {
+    var lives = data[0].lives;
+    $livesCount.text("Lives Remaining: " + lives + "/9");
+  });
 };
 
 // Add event listeners to the submit and delete buttons
