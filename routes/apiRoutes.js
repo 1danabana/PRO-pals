@@ -40,3 +40,7 @@ module.exports = function(app) {
     });
   });
 };
+// edit task 
+app.edit("/api/tasks/:id", function(req, res){
+  db.Todos.create(req.)
+})

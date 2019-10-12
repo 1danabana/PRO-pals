@@ -145,32 +145,6 @@ var handleFormSubmit = function(event) {
   $taskCompleteBy.val("");
 };
 
-//Edit an existing task
-var editTask = function(){
-  console.log("Edit task...");
-
-
-  var listItem = this.parentNode;
-  var editInput = listItem.querySelector("input[type=text]");
-  var label = listItem.querySelector("label");
-
-  var containsClass = listItem.classList.contains("editMode");
-
-
-      //if the class pf parent is .editmode
-  if (containsClass){
-    //label text become the input's value  
-    label.innerText = editInput.value;
-
-  } else {
-      //switch to .editmode
-      //input value becomes the label's text
-    editInput.vaule = label.innerText;
-  }
-
-  listItem.classList.toggle("editMode"); //toggle .editmode on the parent
-
-}
 
 // handleDeleteBtnClick is called when an Task's delete button is clicked
 // Remove the Task from the db and refresh the list
@@ -190,6 +164,16 @@ var handleCompBtnClick = function() {
     .attr("data-id");
 
   API.completeTask(taskID).then(function() {
+    refreshTasks();
+  });
+};
+//edit button configurations 
+var handleEditBtnClick = function() {
+  var idToEdit = $(this)
+  .parent()
+  .attr("data-id");
+
+  API.editTask(idToEdit).then(function(){
     refreshTasks();
   });
 };
