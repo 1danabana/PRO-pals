@@ -25,4 +25,4 @@ Here are some things that we would be interested in implementing later on down t
 -Social aspect to app (compare streaks with friends, have PRO-PALs playing with each other)
 
 
-This app was built by Peter, Dan, Shane, and Divya. It is our second group project for the UCSD Full Stack Development Bootcamp. It is a full stack app which follows the Model View Controller Framework and uses MySQL/Sequelize, Express.js, Express-Handlebars, and Node.js. It also uses an external library called Tempus Dominus which is a Bootstrap stylized datepicker. This app showcases our combined knowledge of integrating front and back end technologies, concepts, and frameworks.
+This app was built by Peter Geyser, Dan Abana, Shane Cleland, and Divya Enjamuri. It is a full stack app which follows the Model View Controller Framework and uses MySQL/Sequelize, Express.js, Express-Handlebars, and Node.js. It also uses an external library called Tempus Dominus which is a Bootstrap stylized datepicker. This app showcases our combined knowledge of integrating front and back end technologies, concepts, and frameworks.
